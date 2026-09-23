@@ -109,6 +109,30 @@ export default defineConfig(async ({ mode }): Promise<any> => {
     },
     envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
     define: processEnvDefines,
+    build: {
+      chunkSizeWarningLimit: 1600,
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+                return 'react-vendor';
+              }
+              if (id.includes('framer-motion')) {
+                return 'framer-motion';
+              }
+              if (id.includes('lucide-react')) {
+                return 'lucide-icons';
+              }
+              if (id.includes('@supabase')) {
+                return 'supabase';
+              }
+              return 'vendor';
+            }
+          },
+        },
+      },
+    },
   };
 })
 
