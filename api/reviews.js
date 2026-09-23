@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
-import supabase from './db-client.js';
+import supabase from './_lib/db-client.js';
 
 const DATA_PATH = path.join(process.cwd(), 'data', 'reviews.json');
 

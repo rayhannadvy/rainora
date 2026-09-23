@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import supabase from './db-client.js';
+import supabase from './_lib/db-client.js';
 import { createClient } from '@supabase/supabase-js';
 
 const FALLBACK_PRODUCTS_PATH = path.join(process.cwd(), 'data', 'products.json');

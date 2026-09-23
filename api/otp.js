@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
-import supabase from './db-client.js';
+import supabase from './_lib/db-client.js';
 import { createClient } from '@supabase/supabase-js';
-import { sendOtpEmail } from './mailer.js';
+import { sendOtpEmail } from './_lib/mailer.js';
 
 // Persistent stores across module reloads
 if (!globalThis.__RAINORA_OTP_STORE__) {
