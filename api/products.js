@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import supabase from './_lib/db-client.js';
 import { createClient } from '@supabase/supabase-js';
+import { FALLBACK_PRODUCTS } from './_lib/fallback-products.js';
 
 const FALLBACK_PRODUCTS_PATH = path.join(process.cwd(), 'data', 'products.json');
 
@@ -15,7 +16,7 @@ function getFallbackProducts() {
   } catch (err) {
     console.error('Error reading fallback products:', err);
   }
-  return [];
+  return FALLBACK_PRODUCTS || [];
 }
 
 function saveFallbackProducts(products) {
@@ -24,19 +25,23 @@ function saveFallbackProducts(products) {
       fs.writeFileSync(FALLBACK_PRODUCTS_PATH, JSON.stringify(products, null, 2), 'utf8');
     }
   } catch (err) {
-    console.error('Error saving fallback products:', err);
+    // Ignore read-only filesystem errors on serverless
   }
 }
 
 async function verifyAdmin(req) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) return false;
-  const userSupabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
-  const { data, error } = await userSupabase.auth.getUser(token);
-  return !error && !!data?.user;
+  try {
+    const userSupabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tnbhkfqaxbfmohtsssny.supabase.co',
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_3FD7CCySQFIUM-D3CHX0nA_If6yOL98'
+    );
+    const { data, error } = await userSupabase.auth.getUser(token);
+    return !error && !!data?.user;
+  } catch {
+    return false;
+  }
 }
 
 export default async function handler(req, res) {

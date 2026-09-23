@@ -9,7 +9,7 @@ import ProductModal from '../components/ProductModal';
 import Logo from '../components/Logo';
 import LogoBadge from '../components/LogoBadge';
 import { useSettings } from '../contexts/SettingsContext';
-import { CATEGORIES } from '../lib/constants';
+import { CATEGORIES, DEFAULT_PRODUCTS } from '../lib/constants';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -19,27 +19,33 @@ const fadeUp = {
 const DEFAULT_SECTION_ORDER = ['offers', 'new_collection', 'featured', 'categories'];
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [featuredIds, setFeaturedIds] = useState([]);
+  const [products, setProducts] = useState(DEFAULT_PRODUCTS || []);
+  const [featuredIds, setFeaturedIds] = useState([2, 3]);
   const [newCollectionExcluded, setNewCollectionExcluded] = useState([]);
   const [sectionOrder, setSectionOrder] = useState(DEFAULT_SECTION_ORDER);
   const [categories, setCategories] = useState(CATEGORIES);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(null);
   const { settings } = useSettings();
 
   useEffect(() => {
     Promise.all([
-      fetch('/api/products').then((r) => r.json()),
-      fetch('/api/featured').then((r) => r.json()).catch(() => []),
-      fetch('/api/new-collection').then((r) => r.json()).catch(() => []),
-      fetch('/api/homepage-sections').then((r) => r.json()).catch(() => []),
-      fetch('/api/categories').then((r) => r.json()).catch(() => null),
+      fetch('/api/products').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/api/featured').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/api/new-collection').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/api/homepage-sections').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/api/categories').then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ])
       .then(([productsData, featuredData, excludedData, sectionsData, categoriesData]) => {
-        setProducts(Array.isArray(productsData) ? productsData : []);
-        setFeaturedIds(Array.isArray(featuredData) ? featuredData : []);
-        setNewCollectionExcluded(Array.isArray(excludedData) ? excludedData : []);
+        if (Array.isArray(productsData) && productsData.length > 0) {
+          setProducts(productsData);
+        }
+        if (Array.isArray(featuredData) && featuredData.length > 0) {
+          setFeaturedIds(featuredData);
+        }
+        if (Array.isArray(excludedData)) {
+          setNewCollectionExcluded(excludedData);
+        }
         if (Array.isArray(categoriesData) && categoriesData.length > 0) {
           setCategories(categoriesData);
         }
@@ -51,7 +57,7 @@ export default function Home() {
           if (order.length > 0) setSectionOrder(order);
         }
       })
-      .catch(() => setProducts([]))
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 

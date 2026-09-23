@@ -84,7 +84,17 @@ export default defineConfig(async ({ mode }): Promise<any> => {
     plugins.push(m.sourceTags());
   } catch {}
 
-  const env = loadEnv(mode, process.cwd(), ['VITE_', 'NEXT_PUBLIC_']);
+  const defaultEnv: Record<string, string> = {
+    VITE_SUPABASE_URL: 'https://tnbhkfqaxbfmohtsssny.supabase.co',
+    VITE_SUPABASE_ANON_KEY: 'sb_publishable_3FD7CCySQFIUM-D3CHX0nA_If6yOL98',
+    NEXT_PUBLIC_SUPABASE_URL: 'https://tnbhkfqaxbfmohtsssny.supabase.co',
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: 'sb_publishable_3FD7CCySQFIUM-D3CHX0nA_If6yOL98',
+    VITE_GOOGLE_CLIENT_ID: '1065078894672-rmp5kp8vfjns5rn9kp5psfp16g691043.apps.googleusercontent.com',
+    VITE_GOOGLE_AUTH_PROXY: 'https://designarena.ai/auth/google/callback',
+  };
+
+  const loaded = loadEnv(mode, process.cwd(), ['VITE_', 'NEXT_PUBLIC_']);
+  const env = { ...defaultEnv, ...loaded };
   Object.assign(process.env, env);
 
   const processEnvDefines: Record<string, string> = {};

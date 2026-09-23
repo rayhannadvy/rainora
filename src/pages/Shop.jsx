@@ -5,29 +5,27 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
-import { CATEGORIES } from '../lib/constants';
+import { CATEGORIES, DEFAULT_PRODUCTS } from '../lib/constants';
 
 export default function Shop() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(DEFAULT_PRODUCTS || []);
   const [categories, setCategories] = useState(CATEGORIES);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [active, setActive] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCat = searchParams.get('cat') || 'all';
 
   const fetchProducts = () => {
-    setLoading(true);
     Promise.all([
-      fetch('/api/products').then((r) => r.json()),
-      fetch('/api/categories').then((r) => r.json()).catch(() => null),
+      fetch('/api/products').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/api/categories').then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ])
       .then(([prodData, catData]) => {
-        if (Array.isArray(prodData)) setProducts(prodData);
-        else setError('Failed to load products.');
+        if (Array.isArray(prodData) && prodData.length > 0) setProducts(prodData);
         if (Array.isArray(catData) && catData.length > 0) setCategories(catData);
       })
-      .catch(() => setError('Failed to load products.'))
+      .catch(() => {})
       .finally(() => setLoading(false));
   };
 
