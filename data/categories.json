@@ -1,0 +1,26 @@
+[
+  {
+    "key": "pants",
+    "label": "Denim Pants"
+  },
+  {
+    "key": "full_sleeve",
+    "label": "Full-Sleeve Shirts"
+  },
+  {
+    "key": "half_sleeve",
+    "label": "Half-Sleeve Shirts"
+  },
+  {
+    "key": "polo",
+    "label": "Polo T-Shirts"
+  },
+  {
+    "key": "tshirt",
+    "label": "Normal T-Shirts"
+  },
+  {
+    "key": "hoodie",
+    "label": "Hoodie"
+  }
+]

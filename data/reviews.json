@@ -1,0 +1,114 @@
+[
+  {
+    "id": 2,
+    "product_id": 1,
+    "customer_name": "Mahmud H.",
+    "rating": 5,
+    "verified": true,
+    "comment": "Ordered size L and it fits my shoulders perfectly. 100% genuine export quality feel. Highly recommend!",
+    "photo_url": null,
+    "created_at": "2026-08-30T10:15:00.000Z",
+    "helpful_count": 2
+  },
+  {
+    "id": 3,
+    "product_id": 2,
+    "customer_name": "Shahriar K.",
+    "rating": 5,
+    "verified": true,
+    "comment": "The stretch is just right and the tapered ankle cut looks amazing with sneakers and formal shoes alike. Premium brass zipper and stitching.",
+    "photo_url": "/uploads/asset4.jpg",
+    "created_at": "2026-08-25T11:45:00.000Z",
+    "helpful_count": 6
+  },
+  {
+    "id": 4,
+    "product_id": 2,
+    "customer_name": "Nabil R.",
+    "rating": 4,
+    "verified": true,
+    "comment": "Loved the shade of blue. Length is spot on for 32 waist. Fast delivery to Chattogram.",
+    "photo_url": null,
+    "created_at": "2026-08-27T16:30:00.000Z",
+    "helpful_count": 1
+  },
+  {
+    "id": 5,
+    "product_id": 3,
+    "customer_name": "Arif M.",
+    "rating": 5,
+    "verified": true,
+    "comment": "Heavy duty denim that maintains its deep black color after wash. Wrangler quality speaks for itself. 10/10.",
+    "photo_url": "/uploads/asset5.jpg",
+    "created_at": "2026-08-26T09:12:00.000Z",
+    "helpful_count": 5
+  },
+  {
+    "id": 6,
+    "product_id": 6,
+    "customer_name": "Fahim U.",
+    "rating": 5,
+    "verified": true,
+    "comment": "The baby blue shade is crisp and formal. Collar stays rigid without being uncomfortable. Signature embroidery is neat.",
+    "photo_url": "/uploads/asset8.jpg",
+    "created_at": "2026-08-29T18:05:00.000Z",
+    "helpful_count": 3
+  },
+  {
+    "id": 7,
+    "product_id": 6,
+    "customer_name": "Saif Q.",
+    "rating": 4,
+    "verified": true,
+    "comment": "Slim fit fits very nicely. Fabric breathes well in summer weather.",
+    "photo_url": null,
+    "created_at": "2026-09-01T12:00:00.000Z",
+    "helpful_count": 1
+  },
+  {
+    "id": 8,
+    "product_id": 12,
+    "customer_name": "Zubair T.",
+    "rating": 5,
+    "verified": true,
+    "comment": "Collar tipping adds a luxury touch. The navy blue is rich and deep. Will definitely order in other colors too.",
+    "photo_url": "/uploads/asset14.jpg",
+    "created_at": "2026-08-29T15:40:00.000Z",
+    "helpful_count": 4
+  },
+  {
+    "id": 9,
+    "product_id": 2,
+    "customer_name": "Test Reviewer",
+    "rating": 5,
+    "verified": true,
+    "comment": "Very pleased with this purchase. Premium quality fabric.",
+    "photo_url": null,
+    "created_at": "2026-09-04T19:21:32.319Z",
+    "helpful_count": 2
+  },
+  {
+    "id": 10,
+    "product_id": 9,
+    "customer_name": "Rumman",
+    "rating": 5,
+    "verified": true,
+    "comment": "good",
+    "photo_url": null,
+    "created_at": "2026-09-04T19:26:53.013Z",
+    "helpful_count": 0,
+    "admin_reply": "Thank you Rumman! We are thrilled you love the export quality. We recommend pairing it with our comfort denim.",
+    "replied_at": "2026-09-04T19:44:58.640Z"
+  },
+  {
+    "id": 11,
+    "product_id": 8,
+    "customer_name": "trewt",
+    "rating": 5,
+    "verified": true,
+    "comment": "wgfwfgwrg",
+    "photo_url": null,
+    "created_at": "2026-09-05T12:25:24.228Z",
+    "helpful_count": 0
+  }
+]
